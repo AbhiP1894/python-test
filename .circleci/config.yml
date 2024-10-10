@@ -15,7 +15,7 @@ jobs:
             python -m pip install --upgrade pip setuptools wheel pytest
       - run:
           name: List files in the tests directory
-          command: ls -R tests/
+          command: ls -R test/
       - run:
           name: Run tests
           command: |
