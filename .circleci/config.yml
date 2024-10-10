@@ -19,6 +19,18 @@ jobs:
             - .
       - store_test_results:
           path: test-results
+  deploy: # Define the deploy job
+    docker:
+      - image: cimg/python:3.8 # Specify the Docker image for deployment
+    steps:
+      - attach_workspace:
+          at: /workspace
+      - run:
+          name: Deploy to Heroku
+          command: |
+            cd /workspace
+            heroku git:remote -a your-heroku-app-name # Replace with your Heroku app name
+            git push heroku main # Push to Heroku
 
 workflows:
   test_my_app:
