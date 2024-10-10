@@ -1,42 +1,22 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@2.0.3 # Use the latest version
+   python: circleci/python@2.0.3 # Use the latest version
 
 jobs:
-  build_and_test:
-    executor: python/default # Use the default executor defined within the orb
+  build_and_test: # this can be any name you choose
+    executor: python/default # use the default executor defined within the orb
     steps:
-      - checkout # Checkout source code
+      - checkout # checkout source code
       - python/install-packages:
           pkg-manager: pip
       - run:
           name: Run tests
-          command: python -m pytest tests/ --junitxml=junit.xml
+          command: python -m pytest
       - persist_to_workspace:
           root: ~/project
           paths:
             - .
-
-  build-package:
-    docker:
-      - image: cimg/python:3.8 # Use the desired Python version for building
-    steps:
-      - checkout
-      - run:
-          name: Install build tools
-          command: |
-            python -m pip install --upgrade pip setuptools wheel
-      - run:
-          name: Build Python package
-          command: |
-            python setup.py sdist bdist_wheel
-      - run:
-          name: Create the ~/artifacts directory if it doesn't exist
-          command: mkdir -p ~/artifacts
-      - store_artifacts:
-          path: dist
-          destination: ~/artifacts
 
 workflows:
   build-and-test:
