@@ -15,13 +15,11 @@ jobs:
           name: Install dependencies
           command: |
             pip install pytest
-      - run:
-          name: Set up virtual environment
-          command: python -m venv venv && source venv/bin/activate
+    
       - run:
           name: Run tests
           command: |
-            pytest tests/test_calculator.py
+            pytest test_calculator.py
       - store_test_results:
           path: calculatorTest.xml
 
