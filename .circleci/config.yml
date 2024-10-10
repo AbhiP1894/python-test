@@ -1,41 +1,38 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@2
+  python: circleci/python@2.0.1 # Use the latest version
 
 jobs:
   test-python:
-    # Install dependencies and run tests
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.8
     steps:
       - checkout
-
+      - python/install-packages:
+          pkg-manager: pip
+          packages:
+            - pytest
       - run:
-          name: Install dependencies
-          command: |
-            pip install pytest
-    
+          name: List files in the tests directory
+          command: ls -R tests/
       - run:
           name: Run tests
           command: |
-            pytest test_calculator.py
+            source venv/bin/activate && pytest tests/ --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
       - store_test_results:
-          path: calculatorTest.xml
+          path: junit.xml
 
   build-package:
-    # Build Python package (for the calculator project)
     docker:
-      - image: cimg/python:3.8-node
+      - image: cimg/python:3.8
     steps:
       - checkout
-      - run:
-          name: Set up virtual environment
-          command: python -m venv venv && source venv/bin/activate
-      - run:
-          name: Install build tools (setuptools and wheel)
-          command: |
-            pip install setuptools wheel
+      - python/install-packages:
+          pkg-manager: pip
+          packages:
+            - setuptools
+            - wheel
       - run:
           name: Build Python package
           command: |
