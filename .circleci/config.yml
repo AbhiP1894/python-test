@@ -10,9 +10,13 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: pip
+
+      - run:
+          name: Create test results directory
+          command: mkdir -p test-results
       - run:
           name: Run tests
-          command: python -m pytest
+          command: python -m pytest --junitxml=test-results/results.xml
       - persist_to_workspace:
           root: ~/project
           paths:
