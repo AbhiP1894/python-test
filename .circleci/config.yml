@@ -22,6 +22,4 @@ workflows:
   build-and-test:
     jobs:
       - build_and_test
-      - build-package:
-          requires:
-            - build_and_test
+     
