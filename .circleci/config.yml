@@ -19,7 +19,7 @@ jobs:
             - .
       - store_test_results:
           path: test-results
-       - store_artifacts: # Store artifacts for later use
+      - store_artifacts: # Store artifacts for later use
           path: test-results
   deploy: # Define the deploy job
     docker:
