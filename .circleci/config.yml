@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            python -m pip install --upgrade pip setuptools wheel pytest
+            python -m pip install pytest
       - run:
           name: List files in the tests directory
           command: ls -R test/
