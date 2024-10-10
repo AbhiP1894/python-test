@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            pytest test/ --junitxml=junit.xml || ((($? == 5)) && echo 'Did not find any tests to run.')
+            pytest test/ 
       - store_test_results:
           path: junit.xml
 
