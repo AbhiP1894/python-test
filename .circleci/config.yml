@@ -9,16 +9,14 @@ jobs:
       - checkout
       - python/install-packages:
           pkg-manager: pip
-      - run:
-          name: Create test results directory
-          command: mkdir -p test-results
+     
       - run:
           name: Run tests
-          command: python -m pytest --junitxml=test-results/results.xml
+          command: python -m pytest --junitxml=results.xml
       - store_test_results:
-          path: test-results
+          path: results.xml
       - store_artifacts: # Store artifacts for later use
-          path: test-results
+          path: results.xml
  
 workflows:
   test_my_app:
