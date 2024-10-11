@@ -16,10 +16,7 @@ jobs:
       - run:
           name: Run tests
           command: python -m pytest --junitxml=test-results/results.xml
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
+      
       - store_test_results:
           path: test-results
       - store_artifacts: # Store artifacts for later use
