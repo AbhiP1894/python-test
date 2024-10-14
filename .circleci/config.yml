@@ -3,6 +3,9 @@ orbs:
   python: circleci/python@2.0.3
   
 jobs:
+ runner-test:
+    machine: true
+    resource_class: team_1/aws
   build_and_test: 
     executor: python/default
     steps:
