@@ -3,7 +3,7 @@ orbs:
   python: circleci/python@2.0.3
   
 jobs:
-  build_and_test: # this can be any name you choose
+  build_and_test: 
     executor: python/default
     steps:
       - checkout
@@ -15,7 +15,7 @@ jobs:
           command: python -m pytest --junitxml=results.xml
       - store_test_results:
           path: results.xml
-      - store_artifacts: # Store artifacts for later use
+      - store_artifacts: 
           path: results.xml
  
 workflows:
