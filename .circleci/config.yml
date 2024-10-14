@@ -6,7 +6,11 @@ jobs:
   runner-test:
     machine: true
     resource_class: team_1/aws
-    
+    steps:
+      - run:
+          name: "Placeholder step for runner-test"
+          command: echo "Runner test job is configured."
+
   build_and_test: 
     executor: python/default
     steps:
