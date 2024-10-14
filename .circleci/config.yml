@@ -3,16 +3,16 @@ orbs:
   python: circleci/python@2.0.3
   
 jobs:
- runner-test:
+  runner-test:
     machine: true
     resource_class: team_1/aws
+    
   build_and_test: 
     executor: python/default
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: pip
-     
       - run:
           name: Run tests
           command: python -m pytest --junitxml=results.xml
