@@ -3,9 +3,9 @@ orbs:
   python: circleci/python@2.0.3
   
 jobs:
-  runner-test:
-    machine: true
-    resource_class: team_1/aws
+ docker:
+      - image: cimg/go:1.18.1
+    parallelism: 4
     steps:
       - run:
           name: "Placeholder step for runner-test"
