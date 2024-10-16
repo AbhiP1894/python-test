@@ -4,13 +4,14 @@ orbs:
   python: circleci/python@2.0.3
 
 jobs:
-  docker:
-     - image: cimg/go:1.18.1
-    parallelism: 4
-    steps:
-      - run:
-          name: "Placeholder step for runner-test"
-          command: echo "Runner test job is configured."
+  build:
+      docker:
+         - image: cimg/go:1.18.1
+        parallelism: 4
+        steps:
+          - run:
+              name: "Placeholder step for runner-test"
+              command: echo "Runner test job is configured."
 
   build_and_test: 
     docker:  # Specify that this job will use a Docker executor
