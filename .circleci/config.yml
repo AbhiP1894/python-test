@@ -5,9 +5,10 @@ orbs:
 
 jobs:
   build:
-    docker:
-      - image: cimg/go:1.18.1
-    parallelism: 4
+      docker:
+        - image: cimg/python:3.12.0
+      parallelism: 4 
+      resource_class: large
     steps:
       - run:
           name: "Placeholder step for runner-test"
