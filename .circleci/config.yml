@@ -12,6 +12,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install pytest and pytest-xdist
+          command: pip install pytest pytest-xdist
+      - run:
           name: Install pipenv
           command: pip install pipenv
       - python/install-packages:
