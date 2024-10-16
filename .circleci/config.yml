@@ -5,16 +5,16 @@ orbs:
 
 jobs:
   build:
-      docker:
-        - image: cimg/python:3.12.0
-      parallelism: 4 
-      resource_class: large
+    docker:
+      - image: cimg/python:3.12.0
+    parallelism: 4
+    resource_class: large
     steps:
       - run:
           name: "Placeholder step for runner-test"
           command: echo "Runner test job is configured."
 
-  build_and_test: 
+  build_and_test:
     docker:  # Specify that this job will use a Docker executor
       - image: circleci/python:3.8  # Use an appropriate Python image
     steps:
@@ -26,7 +26,7 @@ jobs:
           command: python -m pytest --junitxml=results.xml
       - store_test_results:
           path: results.xml
-      - store_artifacts: 
+      - store_artifacts:
           path: results.xml
 
 workflows:
