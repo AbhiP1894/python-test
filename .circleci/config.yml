@@ -10,15 +10,10 @@ jobs:
     parallelism: 4
     resource_class: large
     steps:
-      - run:
-          name: "Placeholder step for runner-test"
-          command: echo "Runner test job is configured."
-
-  build_and_test:
-    docker:  # Specify that this job will use a Docker executor
-      - image: circleci/python:3.8  # Use an appropriate Python image
-    steps:
       - checkout
+      - run:
+          name: Install pipenv
+          command: pip install pipenv
       - python/install-packages:
           pkg-manager: pip
       - run:
@@ -32,4 +27,4 @@ jobs:
 workflows:
   test_my_app:
     jobs:
-      - build_and_test
+      - build
