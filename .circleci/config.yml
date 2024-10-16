@@ -4,11 +4,11 @@ orbs:
   python: circleci/python@2.0.3
 
 jobs:
-  build:
+  build_and_test:
     docker:
       - image: cimg/python:3.12.0
-    parallelism: 4
     resource_class: large
+    parallelism: 4  # This allows up to 4 parallel instances of this job
     steps:
       - checkout
       - run:
@@ -21,13 +21,26 @@ jobs:
           pkg-manager: pip
       - run:
           name: Run tests
-          command: python -m pytest --junitxml=results.xml
+          command: |
+            # Run specific tests based on the CircleCI job index
+            if [ "$CIRCLE_NODE_INDEX" -eq 0 ]; then
+              python -m pytest tests/test_calculator.py --junitxml=results_1.xml
+            elif [ "$CIRCLE_NODE_INDEX" -eq 1 ]; then
+              python -m pytest tests/test_calculator.py --junitxml=results_2.xml
+            elif [ "$CIRCLE_NODE_INDEX" -eq 2 ]; then
+              python -m pytest tests/test_calculator.py --junitxml=results_3.xml
+            elif [ "$CIRCLE_NODE_INDEX" -eq 3 ]; then
+              python -m pytest tests/test_calculator.py --junitxml=results_4.xml
+            fi
       - store_test_results:
-          path: results.xml
+          path: results_1.xml  # Adjusted for the first test set
       - store_artifacts:
-          path: results.xml
+          path: results_1.xml  # Adjusted for the first test set
 
 workflows:
   test_my_app:
     jobs:
-      - build
+      - build_and_test:
+          parallelism: 4  # Run up to 4 parallel instances of the job
+
+
