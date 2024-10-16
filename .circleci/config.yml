@@ -5,7 +5,6 @@ orbs:
 
 jobs:
   docker:
-    docker:
       - image: cimg/go:1.18.1
     parallelism: 4
     steps:
